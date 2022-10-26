@@ -431,7 +431,7 @@ export interface IButtonProps extends TouchableOpacityProps, ISpacing {
    * @see https://docs.expo.io/guides/icons/
    * @see https://icons.expo.fyi
    */
-    icon?: 'add' | 'school';
+    icon?: 'add' | 'share';
   /**
    * Renders Button content
    */

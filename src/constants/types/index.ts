@@ -65,6 +65,16 @@ export interface ILocation {
   city?: string;
   country?: string;
 }
+export interface ICategory {
+  id?: number;
+  type?: string;
+  name?: string;
+}
+export interface IGroup {
+  id?: number;
+  name?: string;
+  lastActivity?: string;
+}
 export interface IUseData {
   isDark: boolean;
   handleIsDark: (isDark?: boolean) => void;

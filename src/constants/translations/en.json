@@ -42,6 +42,7 @@
     "checkout": "Proceed to checkout",
     "readArticle": "Read Article",
     "send": "Send",
+    "add": "Add",
     "guests": {
       "one": "1 guest",
       "other": "{{count}} guests",
@@ -65,7 +66,9 @@
     "register": "Create account",
     "extra": "Extra - Automotive",
     "login": "Login",
-    "location": "Location"
+    "location": "Locations",
+    "category":"Categories",
+    "group":"Groups"
   },
   "navigation": {
     "home": "Soft UI",
@@ -84,7 +87,10 @@
     "register": "Register",
     "login": "Login",
     "extra": "Automotive",
-    "shopping": "Shopping Cart"
+    "shopping": "Shopping Cart",
+    "addcategory": "New Category",
+    "addgroup": "New Group",
+    "addlocation":"New Location"
   },
   "menu": {
     "started": "Getting Started",
