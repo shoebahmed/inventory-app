@@ -1,7 +1,8 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import {Articles, Components, Home, Profile, Register, Login, Locations} from '../screens';
+import {Articles, Components, Home, Profile,Register, Login, Locations, 
+  Categories,AddCategory,Groups} from '../screens';
 import {useScreenOptions, useTranslation} from '../hooks';
 
 const Stack = createStackNavigator();
@@ -49,6 +50,24 @@ export default () => {
       <Stack.Screen
         name="Locations"
         component={Locations}
+        options={{headerShown: true}}
+      />
+      <Stack.Screen
+        name="Categories"
+        component={Categories}
+        options={{headerShown: true}}
+      />
+      <Stack.Screen
+        name="AddCategory"
+        component={AddCategory}
+        options={{
+                  headerShown: true, 
+                  title: t('navigation.addcategory')
+                }}
+      />
+      <Stack.Screen
+        name="Groups"
+        component={Groups}
         options={{headerShown: true}}
       />
     </Stack.Navigator>
