@@ -2,7 +2,7 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import {Articles, Components, Home, Profile,Register, Login, Locations, 
-  Categories,AddCategory,Groups} from '../screens';
+  Categories,AddCategory,Groups, AddProduct, CameraModule} from '../screens';
 import {useScreenOptions, useTranslation} from '../hooks';
 
 const Stack = createStackNavigator();
@@ -56,6 +56,22 @@ export default () => {
         name="Categories"
         component={Categories}
         options={{headerShown: true}}
+      />
+      <Stack.Screen
+        name="AddProduct"
+        component={AddProduct}
+        options={{
+                  headerShown: true, 
+                  title: t('navigation.addcategory')
+                }}
+      />
+      <Stack.Screen
+        name="CameraModule"
+        component={CameraModule}
+        options={{
+                  headerShown: false, 
+                  title: t('navigation.addcategory')
+                }}
       />
       <Stack.Screen
         name="AddCategory"

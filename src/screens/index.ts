@@ -15,6 +15,8 @@ export {default as Locations} from './Locations';
 export {default as Categories} from './Categories';
 export {default as Groups} from './Groups';
 export {default as AddCategory} from './AddCategory';
+export {default as AddProduct} from './AddProduct';
+export {default as CameraModule} from './CameraModule'
 export {default as Rental} from './Pro';
 export {default as Rentals} from './Pro';
 export {default as Booking} from './Pro';

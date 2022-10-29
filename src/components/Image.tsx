@@ -37,6 +37,7 @@ const Image = ({
   marginLeft,
   marginTop,
   marginBottom,
+  hidden,
   ...props
 }: IImageProps) => {
   const {colors, sizes} = useTheme();
@@ -79,6 +80,9 @@ const Image = ({
         width: sizes.avatarSize,
         borderRadius: sizes.avatarRadius,
         overflow: 'hidden',
+      }),
+      ...(hidden && {
+        display: 'none',
       }),
     },
   ]) as ImageStyle;
