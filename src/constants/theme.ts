@@ -105,6 +105,9 @@ export const ASSETS: ThemeAssets = {
   avatar1: require('../assets/images/avatar1.png'),
   avatar2: require('../assets/images/avatar2.png'),
 
+  //upload image
+  upload: require('../assets/images/upload.png'),
+
   // cars
   x5: require('../assets/images/x5.png'),
   gle: require('../assets/images/gle.png'),

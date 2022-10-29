@@ -431,7 +431,7 @@ export interface IButtonProps extends TouchableOpacityProps, ISpacing {
    * @see https://docs.expo.io/guides/icons/
    * @see https://icons.expo.fyi
    */
-    icon?: 'add' | 'school';
+    icon?: 'add' | 'share';
   /**
    * Renders Button content
    */
@@ -519,6 +519,11 @@ export interface IImageProps extends ImageProps, ISpacing {
    * @see https://reactnative.dev/docs/transforms#transform
    */
   transform?: ImageStyle['transform'];
+  /**
+   * Avatar sizing: borderRadius from Math.min(height, weight)
+   * sets the width & height to Math.min(height, weight)
+   */
+   hidden?: boolean;
   /**
    * Renders the Image component with custom style, overwrite existing/predefined styles
    * @see https://reactnative.dev/docs/image#style
