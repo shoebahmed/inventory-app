@@ -520,6 +520,11 @@ export interface IImageProps extends ImageProps, ISpacing {
    */
   transform?: ImageStyle['transform'];
   /**
+   * Avatar sizing: borderRadius from Math.min(height, weight)
+   * sets the width & height to Math.min(height, weight)
+   */
+   hidden?: boolean;
+  /**
    * Renders the Image component with custom style, overwrite existing/predefined styles
    * @see https://reactnative.dev/docs/image#style
    */

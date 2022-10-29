@@ -94,6 +94,7 @@ const DrawerContent = (
     {name: t('screens.extra'), to: 'Pro', icon: assets.extras},
     {name: t('screens.login'), to: 'Login', icon: assets.register},
     {name: t('screens.location'), to: 'Locations', icon: assets.location},
+    {name: t('screens.product'), to: 'AddProduct', icon: assets.extras},
     {name: t('screens.category'), to: 'Categories', icon: assets.extras},
     {name: t('screens.group'), to: 'Groups', icon: assets.extras},
   ];

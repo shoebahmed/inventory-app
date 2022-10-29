@@ -68,6 +68,7 @@
     "login": "Login",
     "location": "Locations",
     "category":"Categories",
+    "product":"Add Product",
     "group":"Groups"
   },
   "navigation": {
