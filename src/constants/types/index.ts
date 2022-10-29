@@ -75,6 +75,15 @@ export interface IGroup {
   name?: string;
   lastActivity?: string;
 }
+export interface INewProduct {
+  id?: number;
+  category?: string;
+  location?: string;
+  quantity?: number;
+  description?: string;
+  image?: string;
+  onPress?: (event?: any) => void;
+}
 export interface IUseData {
   isDark: boolean;
   handleIsDark: (isDark?: boolean) => void;
@@ -86,12 +95,16 @@ export interface IUseData {
   handleUsers: (data?: IUser[]) => void;
   basket: IBasket;
   handleBasket: (data?: IBasket) => void;
+  recentlyAdded: IProduct[];
+  setRecentlyAdded: (data?: IProduct[]) => void;
   following: IProduct[];
   setFollowing: (data?: IProduct[]) => void;
   trending: IProduct[];
   setTrending: (data?: IProduct[]) => void;
   categories: ICategory[];
   setCategories: (data?: ICategory[]) => void;
+  categories2: ICategory[];
+  setCategories2: (data?: ICategory[]) => void;
   recommendations: IArticle[];
   setRecommendations: (data?: IArticle[]) => void;
   articles: IArticle[];
