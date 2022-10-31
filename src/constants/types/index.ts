@@ -80,6 +80,7 @@ export interface INewProduct {
   category?: string;
   location?: string;
   quantity?: number;
+  timestamp?: number;
   description?: string;
   image?: string;
   onPress?: (event?: any) => void;
@@ -95,9 +96,9 @@ export interface IUseData {
   handleUsers: (data?: IUser[]) => void;
   basket: IBasket;
   handleBasket: (data?: IBasket) => void;
-  recentlyAdded: IProduct[];
-  setRecentlyAdded: (data?: IProduct[]) => void;
-  following: IProduct[];
+  recentProductList: INewProduct[];
+  setRecentProductList: (data?: INewProduct[]) => void;
+  following: INewProduct[];
   setFollowing: (data?: IProduct[]) => void;
   trending: IProduct[];
   setTrending: (data?: IProduct[]) => void;
