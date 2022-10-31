@@ -13,6 +13,7 @@ const NewProduct = ({
   category,
   location,
   quantity,
+  timestamp,
   description,
   image,
   onPress,

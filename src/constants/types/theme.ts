@@ -229,6 +229,7 @@ export interface ThemeIcons {
   hotel: ImageSourcePropType;
   image: ImageSourcePropType;
   location: ImageSourcePropType;
+  location1: ImageSourcePropType;
   menu: ImageSourcePropType;
   more: ImageSourcePropType;
   notification: ImageSourcePropType;

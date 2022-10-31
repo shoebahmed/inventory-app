@@ -8,13 +8,14 @@ import {
   recentProductList, 
   electronicProductList, 
   homeApplianceProductList,
-  industrialProductList
+  industrialProductList,
+  General,
  } from '../constants/products';
 
 const Home = () => {
   const {t} = useTranslation();
   const [tab, setTab] = useState<number>(0);
-  const {recentlyAdded, following, trending} = useData();
+  const {} = useData();
   const [products, setProducts] = useState(recentProductList);
   const {assets, colors, fonts, gradients, sizes} = useTheme();
 
@@ -22,17 +23,19 @@ const Home = () => {
     (tab: number) => {
       setTab(tab);
       if(tab === 0){
-        setProducts(recentlyAdded);   
+        setProducts(recentProductList);   
       }else if(tab === 1){
         setProducts(electronicProductList);
       }else if(tab === 2){
         setProducts(homeApplianceProductList);
-      }else{
+      }else if(tab === 3){
         setProducts(industrialProductList);
+      }else if(tab === 4){
+        setProducts(General);
       }
       
     },
-    [recentlyAdded, electronicProductList, homeApplianceProductList, industrialProductList, setTab, setProducts],
+    [recentProductList, electronicProductList, homeApplianceProductList, industrialProductList, General, setTab, setProducts],
   );
 
   return (
@@ -44,117 +47,122 @@ const Home = () => {
 
       {/* toggle products list */}
       <Block
+        scroll
+        horizontal
+        showsHorizontalScrollIndicator={false}
         row
         flex={0}
-        align="center"
-        justify="center"
         color={colors.card}
-        paddingBottom={sizes.sm}>
-        <Button onPress={() => void(0)}>
-          <Block row align="center">
+        paddingBottom={sizes.ms}>
+        <Button onPress={() => handleProducts(0)}>
+          <Block row>
             <Block
-              flex={0}
+              flex={1}
               radius={6}
               align="center"
               justify="center"
               marginRight={sizes.s}
-              width={sizes.socialIconSize}
-              height={sizes.socialIconSize}
+              marginHorizontal={sizes.s}
               gradient={gradients?.[tab === 0 ? 'primary' : 'secondary']}>
-              <Image source={assets.extras} color={colors.white} radius={0} />
             </Block>
             <Text p font={fonts?.[tab === 0 ? 'medium' : 'normal']}>
-              {t('home.recentlyadded')}
+              {t('home.recentProductList')}
             </Text>
           </Block>
         </Button>
         <Block
-          gray
-          flex={0}
-          width={1}
-          marginHorizontal={sizes.sm}
-          height={sizes.socialIconSize}
-        />
-        <Button onPress={() => handleProducts(0)}>
-          <Block row align="center">
-            <Block
-              flex={0}
-              radius={6}
-              align="center"
-              justify="center"
-              marginRight={sizes.s}
-              width={sizes.socialIconSize}
-              height={sizes.socialIconSize}
-              gradient={gradients?.[tab === 1 ? 'primary' : 'secondary']}>
-              <Image
-                radius={0}
-                color={colors.white}
-                source={assets.documentation}
-              />
-            </Block>
-            <Text p font={fonts?.[tab === 1 ? 'medium' : 'normal']}>
-              {t('home.electronic')}
-            </Text>
-          </Block>
-        </Button>
-        <Block
-          gray
+          // gray
           flex={0}
           width={1}
           marginHorizontal={sizes.sm}
           height={sizes.socialIconSize}
         />
         <Button onPress={() => handleProducts(1)}>
-          <Block row align="center">
+          <Block row>
             <Block
-              flex={0}
+              flex={1}
               radius={6}
               align="center"
               justify="center"
               marginRight={sizes.s}
-              width={sizes.socialIconSize}
-              height={sizes.socialIconSize}
+              marginHorizontal={sizes.s}
               gradient={gradients?.[tab === 1 ? 'primary' : 'secondary']}>
-              <Image
-                radius={0}
-                color={colors.white}
-                source={assets.documentation}
-              />
             </Block>
             <Text p font={fonts?.[tab === 1 ? 'medium' : 'normal']}>
-              {t('home.appliance')}
+              {t('home.electronicProductList')}
             </Text>
           </Block>
         </Button>
         <Block
-          gray
+          // gray
           flex={0}
           width={1}
           marginHorizontal={sizes.sm}
           height={sizes.socialIconSize}
         />
         <Button onPress={() => handleProducts(2)}>
-          <Block row align="center">
+          <Block row>
             <Block
               flex={0}
               radius={6}
               align="center"
               justify="center"
               marginRight={sizes.s}
-              width={sizes.socialIconSize}
-              height={sizes.socialIconSize}
-              gradient={gradients?.[tab === 1 ? 'primary' : 'secondary']}>
-              <Image
-                radius={0}
-                color={colors.white}
-                source={assets.documentation}
-              />
+              gradient={gradients?.[tab === 2 ? 'primary' : 'secondary']}>
             </Block>
-            <Text p font={fonts?.[tab === 1 ? 'medium' : 'normal']}>
-              {t('home.industrial')}
+            <Text p font={fonts?.[tab === 2 ? 'medium' : 'normal']}>
+              {t('home.homeApplianceProductList')}
             </Text>
           </Block>
         </Button>
+        <Block
+          flex={0}
+          width={1}
+          marginHorizontal={sizes.sm}
+          height={sizes.socialIconSize}
+        />
+        <Button onPress={() => handleProducts(3)}>
+          <Block row>
+            <Block
+              flex={0}
+              radius={6}
+              align="center"
+              justify="center"
+              marginRight={sizes.s}
+              gradient={gradients?.[tab === 3 ? 'primary' : 'secondary']}>
+            </Block>
+            <Text p font={fonts?.[tab === 3 ? 'medium' : 'normal']}>
+              {t('home.industrialProductList')}
+            </Text>
+          </Block>
+        </Button>
+        <Block
+          flex={0}
+          width={1}
+          marginHorizontal={sizes.sm}
+          height={sizes.socialIconSize}
+        />
+        <Button onPress={() => handleProducts(4)}>
+          <Block row>
+            <Block
+              flex={0}
+              radius={6}
+              align="center"
+              justify="center"
+              marginRight={sizes.s}
+              gradient={gradients?.[tab === 4 ? 'primary' : 'secondary']}>
+            </Block>
+            <Text p font={fonts?.[tab === 4 ? 'medium' : 'normal']}>
+              {t('home.general')}
+            </Text>
+          </Block>
+        </Button>
+        <Block
+          flex={0}
+          width={1}
+          marginHorizontal={sizes.sm}
+          height={sizes.socialIconSize}
+        />
       </Block>
       
 

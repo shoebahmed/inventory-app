@@ -91,7 +91,7 @@ const DrawerContent = (
     {name: t('screens.settings'), to: 'AddProduct', icon: assets.settings},
     {name: t('screens.register'), to: 'Register', icon: assets.register},
     {name: t('screens.login'), to: 'Login', icon: assets.register},
-    {name: t('screens.location'), to: 'Locations', icon: assets.location},
+    {name: t('screens.location'), to: 'Locations', icon: assets.location1},
     {name: t('screens.product'), to: 'AddProduct', icon: assets.extras},
     {name: t('screens.category'), to: 'Categories', icon: assets.extras},
     {name: t('screens.group'), to: 'Groups', icon: assets.extras},
@@ -199,16 +199,6 @@ const DrawerContent = (
           </Text>
         </Button>
 
-        <Block row justify="space-between" marginTop={sizes.sm}>
-          <Text color={labelColor}>{t('darkMode')}</Text>
-          <Switch
-            checked={isDark}
-            onPress={(checked) => {
-              handleIsDark(checked);
-              Alert.alert(t('pro.title'), t('pro.alert'));
-            }}
-          />
-        </Block>
       </Block>
     </DrawerContentScrollView>
   );
