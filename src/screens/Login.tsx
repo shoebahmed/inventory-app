@@ -74,25 +74,8 @@ const Login = () => {
             radius={sizes.cardRadius}
             source={assets.background}
             height={sizes.height * 0.3}>
-            <Button
-              row
-              flex={0}
-              justify="flex-start"
-              onPress={() => navigation.goBack()}>
-              <Image
-                radius={0}
-                width={10}
-                height={18}
-                color={colors.white}
-                source={assets.arrow}
-                transform={[{rotate: '180deg'}]}
-              />
-              <Text p white marginLeft={sizes.s}>
-                {t('common.goBack')}
-              </Text>
-            </Button>
 
-            <Text h4 center white marginBottom={sizes.md}>
+            <Text h4 center white marginTop={sizes.md}>
               {t('register.title')}
             </Text>
           </Image>
@@ -174,7 +157,9 @@ const Login = () => {
                   gradient={gradients.divider}
                 />
               </Block>
-          
+              {/* form inputs */}
+              <Block paddingHorizontal={sizes.sm}>
+                
                 <Input
                   autoCapitalize="none"
                   marginBottom={sizes.m}
@@ -195,14 +180,19 @@ const Login = () => {
                   success={Boolean(registration.password && isValid.password)}
                   danger={Boolean(registration.password && !isValid.password)}
                 />
-              </Block>              
+              </Block>
+              {/* checkbox terms */}
+              <Block row flex={0} align="center" paddingHorizontal={sizes.sm}>
+              
+              </Block>
+             
               <Button
                 primary
                 outlined
                 shadow={!isAndroid}
                 marginVertical={sizes.s}
                 marginHorizontal={sizes.sm}
-                onPress={() => navigation.navigate('Pro')}>
+                onPress={() => navigation.navigate('Login')}>
                 <Text bold primary transform="uppercase">
                   {t('common.signin')}
                 </Text>
@@ -211,6 +201,7 @@ const Login = () => {
           </Block>
         </Block>
       </Block>
+    </Block>
   );
 };
 

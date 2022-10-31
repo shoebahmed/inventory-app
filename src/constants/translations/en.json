@@ -99,13 +99,11 @@
   },
   "home": {
     "title": "Soft UI",
-    "following": "Following",
-    "trending": "Trending",
-    "appliance": "Home Appliances",
-    "electronic": "Electronics",
-    "electrical": "Electrical",
-    "recentlyadded": "Recently Added",
-    "industrial": "Industrial"
+    "homeApplianceProductList": "Home Appliances",
+    "electronicProductList": "Electronics",
+    "recentProductList": "Recently Added Products",
+    "industrialProductList": "Industrial",
+    "general": "General"
   },
   "register": {
     "title": "Welcome",
