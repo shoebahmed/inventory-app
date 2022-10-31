@@ -84,13 +84,13 @@ const DrawerContent = (
 
   // screen list for Drawer menu
   const screens = [
+    {name: t('screens.login'), to: 'Login', icon: assets.register},
     {name: t('screens.home'), to: 'Home', icon: assets.home},
     {name: t('screens.components'), to: 'Components', icon: assets.components},
     {name: t('screens.articles'), to: 'Articles', icon: assets.document},
     {name: t('screens.profile'), to: 'Profile', icon: assets.profile},
     {name: t('screens.settings'), to: 'AddProduct', icon: assets.settings},
     {name: t('screens.register'), to: 'Register', icon: assets.register},
-    {name: t('screens.login'), to: 'Login', icon: assets.register},
     {name: t('screens.location'), to: 'Locations', icon: assets.location1},
     {name: t('screens.product'), to: 'AddProduct', icon: assets.extras},
     {name: t('screens.category'), to: 'Categories', icon: assets.extras},
@@ -198,7 +198,6 @@ const DrawerContent = (
             {t('menu.started')}
           </Text>
         </Button>
-
       </Block>
     </DrawerContentScrollView>
   );

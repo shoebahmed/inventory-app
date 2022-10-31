@@ -14,6 +14,12 @@ export default () => {
   return (
     <Stack.Navigator screenOptions={screenOptions.stack}>
       <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{headerShown: false}}
+      />
+      
+      <Stack.Screen
         name="Home"
         component={Home}
         options={{title: t('navigation.home')}}
@@ -47,11 +53,7 @@ export default () => {
         component={Locations}
         options={{headerShown: true}}
       />
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{headerShown: false}}
-      />
+      
       <Stack.Screen 
         name="AddLocation" 
         component={AddLocation} 
