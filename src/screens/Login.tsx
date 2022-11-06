@@ -8,60 +8,36 @@ import {Block, Button, Input, Image, Text, Checkbox} from '../components';
 
 const isAndroid = Platform.OS === 'android';
 
-interface IRegistration {
-  name: string;
+interface ILogin {
   email: string;
   password: string;
-  agreed: boolean;
-}
-interface IRegistrationValidation {
-  name: boolean;
-  email: boolean;
-  password: boolean;
-  agreed: boolean;
 }
 
 const Login = () => {
   const {isDark} = useData();
   const {t} = useTranslation();
   const navigation = useNavigation();
-  const [isValid, setIsValid] = useState<IRegistrationValidation>({
-    name: false,
-    email: false,
-    password: false,
-    agreed: false,
-  });
-  const [registration, setRegistration] = useState<IRegistration>({
-    name: '',
+
+  const [hiddenErrorMessage, setHiddenErrorMessage] = useState(true);
+
+  const loginForm = {
     email: '',
     password: '',
-    agreed: false,
-  });
+  };
+
   const {assets, colors, gradients, sizes} = useTheme();
 
-  const handleChange = useCallback(
-    (value) => {
-      setRegistration((state) => ({...state, ...value}));
-    },
-    [setRegistration],
-  );
-
-  const handleSignUp = useCallback(() => {
-    if (!Object.values(isValid).includes(false)) {
-      /** send/save registratin data */
-      console.log('handleSignUp', registration);
+  const handleSignIn = useCallback(() => {
+    
+    /** send and validate login credentials */
+    if(loginForm.email === 'sa' 
+          && loginForm.password === 'sa'){
+        navigation.navigate('Home');
+    }else{
+      setHiddenErrorMessage(false);
     }
-  }, [isValid, registration]);
-
-  useEffect(() => {
-    setIsValid((state) => ({
-      ...state,
-      name: regex.name.test(registration.name),
-      email: regex.email.test(registration.email),
-      password: regex.password.test(registration.password),
-      agreed: registration.agreed,
-    }));
-  }, [registration, setIsValid]);
+   
+  }, [loginForm]);
 
   return (
     <Block safe marginTop={sizes.md}>
@@ -75,7 +51,7 @@ const Login = () => {
           source={assets.background}
           height={sizes.height * 0.3}>
           <Text h4 center white marginBottom={sizes.md}>
-            {t('register.title')}
+            {t('login.title')}
           </Text>
         </Image>
       </Block>
@@ -100,7 +76,14 @@ const Login = () => {
             tint={colors.blurTint}
             paddingVertical={sizes.sm}>
             <Text p semibold center>
-              {t('register.subtitle')}
+              {t('login.subtitle')}
+            </Text>
+            <Text 
+              hidden={hiddenErrorMessage} 
+              center 
+              danger 
+              marginBottom={sizes.md}>
+              {t('login.error')}
             </Text>
             {/* social buttons */}
             <Block row center justify="space-evenly" marginVertical={sizes.m}>
@@ -164,9 +147,7 @@ const Login = () => {
                 label={t('common.email')}
                 keyboardType="email-address"
                 placeholder={t('common.emailPlaceholder')}
-                success={Boolean(registration.email && isValid.email)}
-                danger={Boolean(registration.email && !isValid.email)}
-                onChangeText={(value) => handleChange({email: value})}
+                onChangeText={(value) => loginForm.email = value}
               />
               <Input
                 secureTextEntry
@@ -174,9 +155,7 @@ const Login = () => {
                 marginBottom={sizes.m}
                 label={t('common.password')}
                 placeholder={t('common.passwordPlaceholder')}
-                onChangeText={(value) => handleChange({password: value})}
-                success={Boolean(registration.password && isValid.password)}
-                danger={Boolean(registration.password && !isValid.password)}
+                onChangeText={(value) => loginForm.password = value}
               />
             </Block>
             <Button
@@ -185,7 +164,7 @@ const Login = () => {
               shadow={!isAndroid}
               marginVertical={sizes.s}
               marginHorizontal={sizes.sm}
-              onPress={() => navigation.navigate('Home')}>
+              onPress={() => handleSignIn()}>
               <Text bold primary transform="uppercase">
                 {t('common.signin')}
               </Text>
@@ -199,3 +178,4 @@ const Login = () => {
 };
 
 export default Login;
+
