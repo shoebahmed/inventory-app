@@ -55,6 +55,8 @@ export interface IProduct {
   id?: number;
   title?: string;
   description?: string;
+  location?: string;
+  category?: string;
   image?: string;
   timestamp?: number;
   linkLabel?: string;
@@ -77,6 +79,7 @@ export interface IGroup {
 }
 export interface INewProduct {
   id?: number;
+  name?:string;
   category?: string;
   location?: string;
   quantity?: number;

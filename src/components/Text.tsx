@@ -59,6 +59,7 @@ const Typography = (props: ITextProps) => {
     paddingVertical,
     paddingRight,
     paddingLeft,
+    hidden,
     ...rest
   } = props;
   const {colors, sizes, lines, weights, fonts} = useTheme();
@@ -163,6 +164,9 @@ const Typography = (props: ITextProps) => {
       ...(left !== undefined && {left}),
       ...(top !== undefined && {top}),
       ...(bottom !== undefined && {bottom}),
+      ...(hidden && {
+        display: 'none'
+      })
     },
   ]) as TextStyle;
 

@@ -2,8 +2,9 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import {Articles, Components, Home, Profile,Register, Login, Locations, 
-  Categories,AddCategory,Groups, AddProduct, CameraModule, AddLocation} from '../screens';
+  Categories,AddCategory,Groups, AddProduct, CameraModule, AddLocation,ProductList} from '../screens';
 import {useScreenOptions, useTranslation} from '../hooks';
+
 
 const Stack = createStackNavigator();
 
@@ -97,6 +98,12 @@ export default () => {
         component={Groups}
         options={{headerShown: true}}
       />
+      <Stack.Screen
+        name="ProductList"
+        component={ProductList}
+        options={{headerShown: true}}
+      />
+      
     </Stack.Navigator>
   );
 };
