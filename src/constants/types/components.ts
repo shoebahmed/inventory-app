@@ -903,6 +903,10 @@ export interface ITextProps extends TextProps, ISpacing {
    */
   position?: TextStyle['position'];
   /**
+   * Hide text component.
+   */
+  hidden?: boolean;
+  /**
    * Renders a Text component to display text
    * Supports nesting, styling, and touch handling.
    * @see https://reactnative.dev/docs/text

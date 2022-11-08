@@ -14,6 +14,7 @@ export {default as Login} from './Login';
 export {default as Locations} from './Locations';
 export {default as Categories} from './Categories';
 export {default as Groups} from './Groups';
+export {default as ProductList} from './ProductList';
 export {default as AddCategory} from './AddCategory';
 export {default as AddProduct} from './AddProduct';
 export {default as CameraModule} from './CameraModule'; 
