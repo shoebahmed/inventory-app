@@ -43,6 +43,7 @@
     "readArticle": "Read Article",
     "send": "Send",
     "add": "Add",
+    "save": "Save",
     "guests": {
       "one": "1 guest",
       "other": "{{count}} guests",

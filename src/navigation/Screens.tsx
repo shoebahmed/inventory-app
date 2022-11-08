@@ -71,6 +71,11 @@ export default () => {
       <Stack.Screen
         name="AddProduct"
         component={AddProduct}
+        initialParams={{
+          'action': 'add',
+          'productId':'-1',
+          'imageUrl': 'null'
+          }} 
         options={{
                   headerShown: true, 
                   title: t('navigation.addcategory')

@@ -1,18 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {useNavigation} from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/core';
 
 import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import Constants from 'expo-constants';
+import * as ImagePicker from 'expo-image-picker'
 import { Camera, CameraType } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons, Feather } from '@expo/vector-icons';
 import Button from '../components/Button';
 import { Block } from '../components';
+import CameraButton from '../components/CameraButton';
+import { Platform } from 'expo-modules-core';
 
 const CameraModule = () => {
 
   const navigation = useNavigation();
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
+  const [selectedImage, setSelectedImage] = React.useState(null);
   const [image, setImage] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
@@ -23,6 +27,12 @@ const CameraModule = () => {
       MediaLibrary.requestPermissionsAsync();
       const cameraStatus = await Camera.requestCameraPermissionsAsync();
       setHasCameraPermission(cameraStatus.status === 'granted');
+
+      if (Platform.OS !== "web") {
+        const { status } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+      }
     })();
   }, []);
 
@@ -39,7 +49,7 @@ const CameraModule = () => {
   };
 
   const savePicture = async () => {
-    navigation.navigate('AddProduct',{imageUrl: image})
+    navigation.navigate('AddProduct', { imageUrl: image })
     setImage(null);
 
     /*if (image) {
@@ -58,8 +68,8 @@ const CameraModule = () => {
     return <Text>No access to camera</Text>
   }
 
-    return (
-        <View style={styles.container}>
+  return (
+    <View style={styles.container}>
       {!image ? (
         <Camera
           style={styles.camera}
@@ -74,23 +84,21 @@ const CameraModule = () => {
               paddingHorizontal: 30,
             }}
           >
-            <Button
+            <CameraButton
               title=""
-              icon="retweet"
+              icon="camera-reverse"
               onPress={() => {
                 setType(
                   type === CameraType.back ? CameraType.front : CameraType.back
                 );
               }}
             />
-            <Button
-              onPress={() =>
+            <CameraButton
+              onPress={() => {
                 setFlash(
-                  flash === Camera.Constants.FlashMode.off
-                    ? Camera.Constants.FlashMode.on
-                    : Camera.Constants.FlashMode.off
+                  flash === Camera.Constants.FlashMode.off ? Camera.Constants.FlashMode.torch : Camera.Constants.FlashMode.off
                 )
-              }
+              }}
               icon="flash"
               color={flash === Camera.Constants.FlashMode.off ? 'gray' : '#fff'}
             />
@@ -106,55 +114,97 @@ const CameraModule = () => {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
-              paddingHorizontal: 50,
+              paddingHorizontal: 40,
             }}
           >
-            <Button
+            <CameraButton
               title="Re-take"
               onPress={() => setImage(null)}
-              icon="retweet"
+              icon="close-outline"
             />
-            <Button title="Save" onPress={savePicture} icon="check" />
+            <CameraButton
+              title="Save"
+              onPress={savePicture}
+              icon="checkmark"
+            />
           </View>
         ) : (
-          <Button title="Take a picture" onPress={takePicture} icon="camera" />
+          <>
+            <View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  paddingHorizontal: 30,
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    paddingHorizontal: 110,
+                  }}
+                >
+                  <CameraButton
+                    onPress={takePicture}
+                    icon="camera"
+                  />
+                </View>
+              </View>
+            </View>
+          </>
         )}
       </View>
     </View>
-    )
+  )
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      paddingTop: Constants.statusBarHeight,
-      backgroundColor: '#000',
-      padding: 8,
-    },
-    controls: {
-      flex: 0.5,
-    },
-    button: {
-      height: 40,
-      borderRadius: 6,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    text: {
-      fontWeight: 'bold',
-      fontSize: 16,
-      color: '#E9730F',
-      marginLeft: 10,
-    },
-    camera: {
-      flex: 5,
-      borderRadius: 20,
-    },
-    topControls: {
-      flex: 1,
-    },
-  });
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#ffffff',
+    padding: 0,
+  },
+  controls: {
+    flex: 0.5,
+    backgroundColor: '#000',
+  },
+  button: {
+    height: 40,
+    borderRadius: 6,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ffffff',
+  },
+  text: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: '#E9730F',
+    marginLeft: 10,
+  },
+  camera: {
+    flex: 4,
+    borderRadius: 5,
+  },
+  topControls: {
+    flex: 1,
+  },
+});
 
 export default CameraModule;
+
+export async function openMediaLibrary() {
+
+  console.log("Calling Media");
+  const result = await ImagePicker.launchImageLibraryAsync({
+    mediaTypes: ImagePicker.MediaTypeOptions.All,
+    allowsEditing: true,
+    aspect: [4, 3],
+    quality: 1,
+  });
+
+  console.log(result.uri);
+  return result.uri;
+}
