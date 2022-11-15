@@ -2,6 +2,10 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {Linking, Platform} from 'react-native';
 import {useNavigation} from '@react-navigation/core';
 
+import * as Google from 'expo-auth-session/providers/google';
+import * as Facebook from 'expo-auth-session/providers/facebook';
+import { ResponseType } from 'expo-auth-session';
+
 import {useData, useTheme, useTranslation} from '../hooks';
 import * as regex from '../constants/regex';
 import {Block, Button, Input, Image, Text, Checkbox} from '../components';
@@ -38,6 +42,71 @@ const Login = () => {
     }
    
   }, [loginForm]);
+
+  /** 
+   * Google Sign In
+   * https://docs.expo.dev/guides/authentication/#google
+   */
+   const [request, response, promptAsync] = Google.useAuthRequest({
+    expoClientId: "1022592197177-25vj7tc24ptc5ld7ukjghudpu4he9kcf.apps.googleusercontent.com",
+    androidClientId: "1022592197177-ltusrepnet6selbl7k9anb97g1qbhvv1.apps.googleusercontent.com",
+    iosClientId: "1022592197177-iv031dsg78fc09h3ajj7k1a0hos81cdg.apps.googleusercontent.com",
+    scopes: ["profile", "email"]
+  });
+
+  async function fetchUserInfo(token: any) {
+    const response = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+    });
+  
+    return await response.json();
+  }
+
+  // Get the user's name using Facebook's Graph API
+  
+  
+  const gooleSignIn = async () => {
+    const authorizeResult = await promptAsync();
+    
+    if (authorizeResult.type === "success") {
+      console.log(authorizeResult?.authentication?.accessToken);
+      let accessToken = authorizeResult?.authentication?.accessToken;
+      const userInfo = await fetchUserInfo(accessToken);
+      console.log(userInfo);
+    }  
+  }
+
+  /**
+   * Facebook Login
+   * https://docs.expo.dev/guides/authentication/#facebook
+   */
+  const [requestFacebook, responseFacebook, promptAsyncFB] = Facebook.useAuthRequest({
+    clientId: '852072426243173',
+    responseType: ResponseType.Token,
+  });
+
+  const facebookSignIn = async () => {
+    const authorizeResult = await promptAsyncFB();
+    
+    if (authorizeResult.type === "success") {
+      console.log(authorizeResult?.authentication?.accessToken);
+      let accessToken = authorizeResult?.authentication?.accessToken;
+      const userInfo = await fetchUserInfoFacebook(accessToken);
+      console.log(userInfo);
+    } 
+  }
+
+  async function fetchUserInfoFacebook(token: any) {
+    
+    const response = await fetch(`https://graph.facebook.com/me?fields=id,name,email&access_token=${token}`);
+
+    return await response.json();
+  }
 
   return (
     <Block safe marginTop={sizes.md}>
@@ -87,7 +156,12 @@ const Login = () => {
             </Text>
             {/* social buttons */}
             <Block row center justify="space-evenly" marginVertical={sizes.m}>
-              <Button outlined gray shadow={!isAndroid}>
+              <Button 
+                outlined
+                gray 
+                shadow={!isAndroid}
+                onPress={() => facebookSignIn()}
+                >
                 <Image
                   source={assets.facebook}
                   height={sizes.m}
@@ -103,7 +177,12 @@ const Login = () => {
                   color={isDark ? colors.icon : undefined}
                 />
               </Button>
-              <Button outlined gray shadow={!isAndroid}>
+              <Button 
+                outlined 
+                gray 
+                shadow={!isAndroid}
+                onPress={() => gooleSignIn()}
+                >
                 <Image
                   source={assets.google}
                   height={sizes.m}
