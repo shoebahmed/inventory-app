@@ -67,6 +67,7 @@ export const ICONS: ThemeIcons = {
   star: require('../assets/icons/star.png'),
   quantity: require('../assets/icons/quantity.png'),
   train: require('../assets/icons/train.png'),
+  temproryIcon: require('../assets/icons/temproryIcon.png'),
   users: require('../assets/icons/users.png'),
   warning: require('../assets/icons/warning.png'),
 };

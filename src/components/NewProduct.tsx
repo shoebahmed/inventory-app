@@ -13,6 +13,7 @@ const NewProduct = ({
   category,
   location,
   quantity,
+  temproryIcon,
   timestamp,
   description,
   image,
@@ -54,12 +55,20 @@ const NewProduct = ({
               <Text p size={12} semibold>
                 {location}
               </Text>
-              <Text p bold marginHorizontal={sizes.s}>
-                •
+              <Text marginHorizontal={sizes.s}>
+                
               </Text>
               <Image source={icons.quantity} marginRight={sizes.s} />
               <Text p size={12} semibold>
                 {quantity}
+              </Text>
+
+              <Text marginHorizontal={sizes.s}>
+                
+              </Text>
+              <Image source={icons.temproryIcon} marginRight={sizes.s} />
+              <Text p size={12} semibold>
+                {temproryIcon}
               </Text>
             </Block>
         </Block>

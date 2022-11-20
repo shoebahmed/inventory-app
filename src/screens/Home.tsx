@@ -71,7 +71,7 @@ const Home = () => {
           </Block>
         </Button>
         <Block
-          // gray
+          gray
           flex={0}
           width={1}
           marginHorizontal={sizes.sm}
@@ -85,7 +85,7 @@ const Home = () => {
               align="center"
               justify="center"
               marginRight={sizes.s}
-              marginHorizontal={sizes.s}
+              marginHorizontal={sizes.ms}
               gradient={gradients?.[tab === 1 ? 'primary' : 'secondary']}>
             </Block>
             <Text p font={fonts?.[tab === 1 ? 'medium' : 'normal']}>
@@ -94,7 +94,7 @@ const Home = () => {
           </Block>
         </Button>
         <Block
-          // gray
+          gray
           flex={0}
           width={1}
           marginHorizontal={sizes.sm}
@@ -116,6 +116,7 @@ const Home = () => {
           </Block>
         </Button>
         <Block
+          gray
           flex={0}
           width={1}
           marginHorizontal={sizes.sm}
@@ -137,6 +138,7 @@ const Home = () => {
           </Block>
         </Button>
         <Block
+          gray
           flex={0}
           width={1}
           marginHorizontal={sizes.sm}

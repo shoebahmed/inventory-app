@@ -191,7 +191,7 @@ const AddProduct = () => {
                 </Button>
               )}
             />
-          </Modal>
+          </Modal>  
           <Input placeholder="Product Name" marginBottom={sizes.sm} />
           <Button
             marginVertical={sizes.s}

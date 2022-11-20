@@ -83,6 +83,7 @@ export interface INewProduct {
   category?: string;
   location?: string;
   quantity?: number;
+  temproryIcon? : number
   timestamp?: number;
   description?: string;
   image?: string;

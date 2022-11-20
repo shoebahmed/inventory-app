@@ -242,6 +242,7 @@ export interface ThemeIcons {
   settings: ImageSourcePropType;
   star: ImageSourcePropType;
   train: ImageSourcePropType;
+  temproryIcon: ImageSourcePropType;
   users: ImageSourcePropType;
   warning: ImageSourcePropType;
 }

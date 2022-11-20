@@ -11,6 +11,7 @@ import Button from '../components/Button';
 import { Block } from '../components';
 import CameraButton from '../components/CameraButton';
 import { Platform } from 'expo-modules-core';
+import { ImageEditor } from "expo-image-editor";
 
 const CameraModule = () => {
 
@@ -21,6 +22,7 @@ const CameraModule = () => {
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
   const cameraRef = useRef(null);
+  const [editorVisible, setEditorVisible] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -42,13 +44,27 @@ const CameraModule = () => {
         const data = await cameraRef.current.takePictureAsync();
         console.log(data);
         setImage(data.uri);
+        setEditorVisible(true);
       } catch (error) {
         console.log(error);
       }
     }
   };
 
+  const editComplete = async () => {
+    
+  };
+
+  const launchEditor = (uri: string) => {
+    // Then set the image uri
+    setImage(image);
+    // And set the image editor to be visible
+    setEditorVisible(true);
+  };
+
   const savePicture = async () => {
+    console.log("savePicture");
+    console.log(image);
     navigation.navigate('AddProduct', { imageUrl: image })
     setImage(null);
 
@@ -87,6 +103,7 @@ const CameraModule = () => {
             <CameraButton
               title=""
               icon="camera-reverse"
+              visible = {true}
               onPress={() => {
                 setType(
                   type === CameraType.back ? CameraType.front : CameraType.back
@@ -99,6 +116,7 @@ const CameraModule = () => {
                   flash === Camera.Constants.FlashMode.off ? Camera.Constants.FlashMode.torch : Camera.Constants.FlashMode.off
                 )
               }}
+              visible = {true}
               icon="flash"
               color={flash === Camera.Constants.FlashMode.off ? 'gray' : '#fff'}
             />
@@ -114,16 +132,39 @@ const CameraModule = () => {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
-              paddingHorizontal: 40,
+              paddingHorizontal: 60
             }}
           >
+            <ImageEditor
+              visible={editorVisible}
+              onCloseEditor={() => {
+                setEditorVisible(false)
+                console.log("on close editor")
+                setImage(image);
+              }}
+              imageUri={image}
+              fixedCropAspectRatio={16 / 9}
+              lockAspectRatio={true}
+              minimumCropDimensions={{
+                width: 100,
+                height: 100,
+              }}
+              onEditingComplete={(result) => {
+                setImage(result.uri);
+                setEditorVisible(false);
+                console.log("Edit done");
+              }}
+              mode="full"
+            />
             <CameraButton
               title="Re-take"
+              visible={!editorVisible}
               onPress={() => setImage(null)}
               icon="close-outline"
             />
             <CameraButton
               title="Save"
+              visible={!editorVisible}
               onPress={savePicture}
               icon="checkmark"
             />
@@ -131,26 +172,32 @@ const CameraModule = () => {
         ) : (
           <>
             <View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  paddingHorizontal: 30,
-                }}
-              >
                 <View
                   style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    paddingHorizontal: 110,
+                    flexDirection: 'row-reverse',
+                    paddingHorizontal: 18,
                   }}
                 >
                   <CameraButton
-                    onPress={takePicture}
-                    icon="camera"
+                    visible = {true}
+                    onPress={ () => navigation.goBack() }
+                    icon="close-outline"
                   />
+               <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    paddingHorizontal: 100,
+                  }}
+                >
+                <CameraButton
+                  visible = {true}
+                  onPress= {takePicture}
+                  icon="camera"
+                  />
+                  </View>
                 </View>
               </View>
-            </View>
           </>
         )}
       </View>
@@ -199,7 +246,7 @@ export async function openMediaLibrary() {
 
   console.log("Calling Media");
   const result = await ImagePicker.launchImageLibraryAsync({
-    mediaTypes: ImagePicker.MediaTypeOptions.All,
+    mediaTypes: ImagePicker.MediaTypeOptions.Images,
     allowsEditing: true,
     aspect: [4, 3],
     quality: 1,
