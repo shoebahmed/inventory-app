@@ -9,7 +9,6 @@ import { ResponseType } from 'expo-auth-session';
 import {useData, useTheme, useTranslation} from '../hooks';
 import * as regex from '../constants/regex';
 import {Block, Button, Input, Image, Text, Checkbox} from '../components';
-
 const isAndroid = Platform.OS === 'android';
 
 interface ILogin {
@@ -169,14 +168,7 @@ const Login = () => {
                   color={isDark ? colors.icon : undefined}
                 />
               </Button>
-              <Button outlined gray shadow={!isAndroid}>
-                <Image
-                  source={assets.apple}
-                  height={sizes.m}
-                  width={sizes.m}
-                  color={isDark ? colors.icon : undefined}
-                />
-              </Button>
+
               <Button 
                 outlined 
                 gray 
